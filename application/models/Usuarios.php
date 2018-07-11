@@ -38,7 +38,7 @@ class Usuarios extends CI_Model{
     	else if( $tipo == 'Docente'){ // verificar usuario y pass, si existe devolver modulos asignados
     		$query = $this->db->query("
     			SELECT nombres as nombre, id FROM public.docente
-    			WHERE  codigo = '".$pass."' AND lower(email) = '".$user."'"
+    			WHERE  (codigo = '".$pass."' OR nro_document = '".$pass."') AND lower(email) = '".$user."'"
             );
 
     		$data = $query->result_array();
