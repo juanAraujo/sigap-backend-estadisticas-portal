@@ -63,7 +63,7 @@ class Usuarios extends CI_Model{
             SELECT verificar_password('".$user."','".$pass."')"
             );
             $data = $query->result_array();
-            if($data != NULL)
+            if(count($data) == 1)
             {
                 $query = $this->db->query("
                 SELECT u.user_name as nombre, u.pass, u.id_usuario as id FROM usuario as u
@@ -96,7 +96,7 @@ class Usuarios extends CI_Model{
             SELECT verificar_password('".$user."','".$pass."')"
             );
             $data = $query->result_array();
-            if($data != NULL)
+            if(count($data) == 1)
             {
                 $query = $this->db->query("
                 SELECT u.user_name as nombre, u.pass, u.id_usuario as id FROM usuario as u
