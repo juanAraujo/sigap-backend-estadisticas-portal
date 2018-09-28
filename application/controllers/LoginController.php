@@ -19,7 +19,7 @@ class LoginController extends REST_Controller {
             $array_out = array("result"=>"error");
         }
         else{
-            $array_out = $this->usuarios->loggin(strtolower($user),$pass,$tipo);
+            $array_out = $this->usuarios->loggin($user,$pass,$tipo);
         }
         $this->response($array_out);
     }
