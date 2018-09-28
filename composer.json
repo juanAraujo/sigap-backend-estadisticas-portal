@@ -2,7 +2,7 @@
 	"description": "Modulo Estadisticas SIGA",
 	"name": "back-estadisticas",
 	"type": "project",
-	"homepage": "https://back-estadisticas.herokuapp.com/",
+	"homepage": "https://backend-estadisticas-portal.herokuapp.com/",
 	"license": "MIT",
 	"require": {
 		"php": ">=5.3.7",
