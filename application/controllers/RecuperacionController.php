@@ -34,10 +34,6 @@ class RecuperacionController extends REST_Controller{
 		}
 		else{
 			$array_out = array("return"=>"failure");
-			$array_out = array("email"=>$email);
-			$array_out = array("dni"=>$dni);
-			$array_out = array("telefono"=>$telefono);
-			$array_out = array("pass"=>$contrasena);
 		}
     	$this->response($array_out);
     }
