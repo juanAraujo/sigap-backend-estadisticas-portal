@@ -14,17 +14,23 @@ class RecuperacionController extends REST_Controller{
     	$contrasena=$this->get("pass");
     	$array_out = array();
     	if($email!=null && $dni!=null && $telefono!=null && $contrasena!=null){
-    		$id=$this->emailmodel->comprobar_existencia($email);
+    		$id=$this->recuperacionmodel->comprobar_existencia($email,$dni,$telefono);
     		if($id!=false){
     			$respuesta=$this->recuperacionmodel->actualizar_pass($id,$contrasena);
                 if($respuesta==true){
-                    $array_out = array("result"=>"success");
+                    $array_out = array("result"=>"cambiada");
                 }
                 else {
                     $array_out = array("result"=>"error");
                 }
-    		}
-    	}
+			}
+			else{
+				$array_out = array("result"=>"no existe");
+			}
+		}
+		else{
+			$array_out = array("return"=>"failure");
+		}
     	$this->response($array_out);
     }
 }
