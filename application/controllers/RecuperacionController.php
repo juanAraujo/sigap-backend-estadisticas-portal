@@ -12,11 +12,6 @@ class RecuperacionController extends REST_Controller{
     	$dni=$this->post("dni");
     	$telefono=$this->post("telefono");
     	$contrasena=$this->post("pass");
-		$array_out = array();
-		$array_out = array("email"=>$email);
-		$array_out = array("dni"=>$dni);
-		$array_out = array("telefono"=>$telefono);
-		$array_out = array("pass"=>$contrasena);
     	if($email!=null && $dni!=null && $telefono!=null && $contrasena!=null){
     		$id=$this->recuperacionmodel->comprobar_existencia($email,$dni,$telefono);
     		if($id!=false){
