@@ -15,7 +15,7 @@ class Recuperacionmodel extends CI_Model
 		$data=$query->result_array();
 		//echo "sdfsdf".count($data);
 		if(count($data)>0){
-			return $data->row()->id_usuario;
+			return $data['id_usuario'];
 		} else {
 			return false;
 		}
