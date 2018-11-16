@@ -8,10 +8,10 @@ class RecuperacionController extends REST_Controller{
     }
     public function index_post(){
     	//$tipo=$this->get("tipo");
-    	$email=$this->get("email");
-    	$dni=$this->get("dni");
-    	$telefono=$this->get("telefono");
-    	$contrasena=$this->get("pass");
+    	$email=$this->post("email");
+    	$dni=$this->post("dni");
+    	$telefono=$this->post("telefono");
+    	$contrasena=$this->post("pass");
 		$array_out = array();
 		$array_out = array("email"=>$email);
 		$array_out = array("dni"=>$dni);
