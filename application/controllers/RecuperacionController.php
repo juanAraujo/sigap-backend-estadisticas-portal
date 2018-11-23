@@ -7,13 +7,13 @@ class RecuperacionController extends REST_Controller{
         $this->load->model('recuperacionmodel');
     }
     public function index_post(){
-    	//$tipo=$this->get("tipo");
+    	$nombre_usuario=$this->post("nombre_usuario");
     	$email=$this->post("email");
     	$dni=$this->post("dni");
     	$telefono=$this->post("telefono");
     	$contrasena=$this->post("pass");
-    	if($email!=null && $dni!=null && $telefono!=null && $contrasena!=null){
-    		$id=$this->recuperacionmodel->comprobar_existencia($email,$dni,$telefono);
+    	if($nombre_usuario!=null && $email!=null && $dni!=null && $telefono!=null && $contrasena!=null){
+    		$id=$this->recuperacionmodel->comprobar_existencia($nombre_usuario,$email,$dni,$telefono);
     		if($id!=false){
     			$respuesta=$this->recuperacionmodel->actualizar_pass($id,$contrasena);
                 if($respuesta==true){
