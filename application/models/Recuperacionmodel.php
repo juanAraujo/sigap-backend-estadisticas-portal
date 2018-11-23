@@ -5,11 +5,11 @@ class Recuperacionmodel extends CI_Model
 	function __construct(){
 		parent::__construct();
 	}
-	public function comprobar_existencia($email,$dni,$telefono){
+	public function comprobar_existencia($nombre_usuario,$email,$dni,$telefono){
 		$query=$this->db->query
 		("select ad.id_usuario from usuario u INNER JOIN administrativo ad ON u.id_usuario=ad.id_usuario 
 		INNER JOIN usuario_perfil up ON up.id_usuario=u.id_usuario
-		where ad.email = '".$email."' and ad.dni='".$dni."' and ad.telefono='".$telefono."' 
+		where u.user_name='".$nombre_usuario."' ad.email = '".$email."' and ad.dni='".$dni."' and ad.telefono='".$telefono."' 
 		and (up.id_perfil = 1 or up.id_perfil = 2) and up.estado_up=true;");
 		//print_r($query);
 		$data=$query->result_array();
