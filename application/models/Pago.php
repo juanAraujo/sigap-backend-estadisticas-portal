@@ -176,8 +176,8 @@ class Pago extends CI_Model
     public function registrosPorSemestre($conceptos, $anio, $periodo){
         $ciclo = $anio."-".$periodo;
         $cicloForma= "";
-        if($periodo == "I") $ciclo2Forma = $anio."-1";
-        else if($periodo == "II") $ciclo2Forma = $anio."-2";
+        if($periodo == "I") $cicloForma = $anio."-1";
+        else if($periodo == "II") $cicloForma = $anio."-2";
 
         if (trim($conceptos) != ""){
             $condicional = "AND c.concepto::integer in (".str_replace ("|",",",$conceptos).")";
