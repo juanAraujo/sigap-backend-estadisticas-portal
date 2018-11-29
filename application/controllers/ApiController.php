@@ -74,13 +74,13 @@ class ApiController extends REST_Controller {
     }
     public function tablaSemestre_get(){
         $conceptos = $this->get("conceptos");
-        $anio = $this->get('anio');
-        $periodo = $this->get('periodo');
+        $ciclo = $this->get('ciclo');
+        $cicloForma = $this->get('cicloForma');
         if($anio == '' || $periodo == ''){
             $array_out = array("result"=>"error tabla semestre");
         }
         else{
-            $array_out = $this->pago->registrosPorSemestre($conceptos, $anio, $periodo);
+            $array_out = $this->pago->registrosPorSemestre($conceptos, $ciclo, $cicloForma);
         }
         $this->response($array_out);
     }
