@@ -187,11 +187,11 @@ class Pago extends CI_Model
             INNER JOIN programa p ON (p.id_programa=aap.id_programa)
             INNER JOIN matricula_cab m ON (m.id_programa=p.id_programa)
             INNER JOIN clase_pagos cp ON (cp.id_clase_pagos = c.id_clase_pagos)
-            WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo=".$ciclo.") 
-                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo=".$ciclo.") 
-                AND m.semestre=".$cicloForma."
+            WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND m.semestre='".$cicloForma."'
                 AND cp.id_clase_pagos in (SELECT distinct (id_clase_pagos) FROM configuracion where estado = 'S')
-                 ".$condicional.")
+                 '".$condicional."')
             GROUP BY p.sigla_programa, c.concepto
             ORDER BY p.sigla_programa, c.concepto");
         
