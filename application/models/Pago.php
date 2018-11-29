@@ -173,11 +173,7 @@ class Pago extends CI_Model
         $array_out = $this->formatoTabla($data);
         return $array_out;
     }
-    public function registrosPorSemestre($conceptos, $anio, $periodo){
-        $ciclo = $anio."-".$periodo;
-        $cicloForma= "";
-        if($periodo == "I") $cicloForma = $anio."-1";
-        else if($periodo == "II") $cicloForma = $anio."-2";
+    public function registrosPorSemestre($conceptos, $ciclo, $cicloForma){
 
         if (trim($conceptos) != ""){
             $condicional = "AND c.concepto::integer in (".str_replace ("|",",",$conceptos).")";
@@ -191,9 +187,9 @@ class Pago extends CI_Model
             INNER JOIN programa p ON (p.id_programa=aap.id_programa)
             INNER JOIN matricula_cab m ON (m.id_programa=p.id_programa)
             INNER JOIN clase_pagos cp ON (cp.id_clase_pagos = c.id_clase_pagos)
-            WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
-                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
-                AND m.semestre='".$cicloForma."'
+            WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo=".$ciclo.") 
+                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo=".$ciclo.") 
+                AND m.semestre=".$cicloForma."
                 AND cp.id_clase_pagos in (SELECT distinct (id_clase_pagos) FROM configuracion where estado = 'S')
                  ".$condicional.")
             GROUP BY p.sigla_programa, c.concepto
