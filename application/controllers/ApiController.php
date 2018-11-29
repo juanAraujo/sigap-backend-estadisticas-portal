@@ -65,7 +65,7 @@ class ApiController extends REST_Controller {
         $fecha_fin = $this->get('fin');
         $conceptos = $this->get("conceptos");
         if($fecha_inicio == '' || $fecha_fin == ''){
-            $array_out = array("result"=>"error1");
+            $array_out = array("result"=>"error tabla fecha");
         }
         else{
             $array_out = $this->pago->registrosPorFechas($fecha_inicio, $fecha_fin,$conceptos);
@@ -77,7 +77,7 @@ class ApiController extends REST_Controller {
         $anio = $this->get('anio');
         $periodo = $this->get('periodo');
         if($anio == '' || $periodo == ''){
-            $array_out = array("result"=>"error1");
+            $array_out = array("result"=>"error tabla semestre");
         }
         else{
             $array_out = $this->pago->registrosPorSemestre($conceptos, $anio, $periodo);
