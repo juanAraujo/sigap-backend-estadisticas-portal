@@ -189,7 +189,7 @@ class Pago extends CI_Model
             WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
                 AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
                 AND m.semestre='".$cicloForma."'
-                 ".$condicional."
+                 ".$condicional.")
             GROUP BY p.sigla_programa, c.concepto
             ORDER BY p.sigla_programa, c.concepto");
         
