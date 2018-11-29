@@ -76,7 +76,7 @@ class ApiController extends REST_Controller {
         $conceptos = $this->get("conceptos");
         $ciclo = $this->get('ciclo');
         $cicloForma = $this->get('cicloForma');
-        if($anio == '' || $periodo == ''){
+        if($ciclo == '' || $cicloForma == ''){
             $array_out = array("result"=>"error tabla semestre");
         }
         else{
