@@ -72,6 +72,18 @@ class ApiController extends REST_Controller {
         }
         $this->response($array_out);
     }
+    public function tablaSemestre_get(){
+        $conceptos = $this->get("conceptos");
+        $anio = $this->get('anio');
+        $periodo = $this->get('periodo');
+        if($anio == '' || $periodo == ''){
+            $array_out = array("result"=>"error1");
+        }
+        else{
+            $array_out = $this->pago->registrosPorSemestre($conceptos, $anio, $periodo);
+        }
+        $this->response($array_out);
+    }
 
     public function tablaYear_get(){
         $year_inicio = $this->get("year_inicio");
