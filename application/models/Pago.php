@@ -175,9 +175,9 @@ class Pago extends CI_Model
     }
     public function registrosPorSemestre($conceptos, $anio, $periodo){
         $ciclo = $anio."-".$periodo;
-        $ciclo2Forma= "";
+        $cicloForma= "";
         if($periodo == "I") $ciclo2Forma = $anio."-1";
-        else if($periodo == "I") $ciclo2Forma = $anio."-2";
+        else if($periodo == "II") $ciclo2Forma = $anio."-2";
 
         if (trim($conceptos) != ""){
             $condicional = "AND c.concepto::integer in (".str_replace ("|",",",$conceptos).")";
@@ -194,7 +194,7 @@ class Pago extends CI_Model
             INNER JOIN public.clase_pagos cp ON (cp.id_clase_pagos = c.id_clase_pagos)
             WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
                 AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
-                AND m.semestre='".$ciclo2Forma."'
+                AND m.semestre='".$cicloForma."'
                 AND cp.id_clase_pagos in (SELECT distinct (id_clase_pagos) FROM configuracion where estado = 'S')
                  ".$condicional.")
             GROUP BY p.sigla_programa, c.concepto
@@ -202,7 +202,7 @@ class Pago extends CI_Model
         );
         
         $data = $query->result_array();
-        $array_out = $this->formatoTabla($data);
+        $array_out = $this->formatoTablaSemestre($data);
         return $array_out;
     }
 
@@ -402,7 +402,15 @@ class Pago extends CI_Model
         }
         return $array_out;
     }
-
+    private function formatoTablaSemestre($data){
+        $array_out = array();
+        if(count($data)>0){
+            foreach ($data as $registro) {
+                $array_out[] = $registro;
+            }
+        }
+        return $array_out;
+    }
     private function formatoFecha($data){
         if(count($data)>0){
             foreach($data["labels"] as $clave => $mes){
