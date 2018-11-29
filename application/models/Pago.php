@@ -185,18 +185,19 @@ class Pago extends CI_Model
         else{
             $condicional = "";
         }
-        $query = $this->db->query(
-            "SELECT p.sigla_programa AS programa, c.concepto AS concepto, SUM(r.importe) AS importe FROM recaudaciones r 
+        $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, SUM(r.importe) AS importe FROM recaudaciones r 
             INNER JOIN concepto c ON (r.id_concepto=c.id_concepto)
             INNER JOIN alumno_alumno_programa aap ON (r.id_alum=aap.id_alum)
             INNER JOIN programa p ON (p.id_programa=aap.id_programa)
             INNER JOIN matricula_cab m ON (m.id_programa=p.id_programa)
+            INNER JOIN clase_pagos cp ON (cp.id_clase_pagos = c.id_clase_pagos)
             WHERE (r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
                 AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
-                AND m.semestre='".$cicloForma."')
+                AND m.semestre='".$cicloForma."'
+                AND cp.id_clase_pagos in (SELECT distinct (id_clase_pagos) FROM configuracion where estado = 'S')
+                 ".$condicional.")
             GROUP BY p.sigla_programa, c.concepto
-            ORDER BY p.sigla_programa, c.concepto"
-        );
+            ORDER BY p.sigla_programa, c.concepto");
         
         $data = $query->result_array();
         $array_out = $this->formatoTablaSemestre($data);
