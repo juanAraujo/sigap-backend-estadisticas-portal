@@ -181,7 +181,7 @@ class Pago extends CI_Model
         else{
             $condicional = "";
         }
-        $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, SUM(r.importe) AS importe FROM recaudaciones r 
+        $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, FORMAT(SUM(r.importe),2) AS importe FROM recaudaciones r 
             INNER JOIN concepto c ON (r.id_concepto=c.id_concepto)
             INNER JOIN alumno_alumno_programa aap ON (r.id_alum=aap.id_alum)
             INNER JOIN programa p ON (p.id_programa=aap.id_programa)
