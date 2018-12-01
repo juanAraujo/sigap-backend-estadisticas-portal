@@ -23,8 +23,8 @@ class CambioMoneda extends CI_Model
              
             echo $fecha;
             $info = json_decode($data, true);
-            
-        }while($info === '[]');
+
+        }while($info[0] === '');
 
         
 
