@@ -7,7 +7,7 @@ class CambioMoneda extends CI_Model
 		parent::__construct();
     }
     
-    public function cambiarASoles($fecha)
+    public function obtenerCambio($fecha)
     {
         do{
             $ch = curl_init("https://api.sunat.cloud/cambio/".$fecha);
@@ -39,6 +39,23 @@ class CambioMoneda extends CI_Model
         print ($array_out[0]);
 
         return $array_out;
+
+    }
+    public function cambiarASoles($fecha)
+    {
+        $array_out = this.obtenerCambio($fecha);
+
+        print($array_out[1]);
+
+        return $array_out[1];
+    }
+    public function cambiarADolares($fecha)
+    {
+        $array_out = this.obtenerCambio($fecha);
+
+        print($array_out[0]);
+
+        return $array_out[0];
     }
 
 }
