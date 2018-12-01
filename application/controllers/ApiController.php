@@ -8,9 +8,14 @@ class ApiController extends REST_Controller {
 
     function __construct(){
         parent::__construct();
-        $this->load->model('pago');
+        $this->load->model('cambioMoneda');
     }
 
+    public function cambio_get(){
+        $fecha = $this->get('fecha');
+        $array_out = $this->pago->cambiarASoles($fecha);
+        $this->response($array_out);
+    }
     public function index_get(){
         $fecha_inicio = $this->get('inicio');
         $fecha_fin = $this->get('fin');
