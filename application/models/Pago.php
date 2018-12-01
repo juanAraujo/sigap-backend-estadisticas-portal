@@ -219,7 +219,7 @@ class Pago extends CI_Model
         
         $data = $query->result_array();
         $array_out_soles = $this->formatoTablaSemestre($data);
-        echo json_encode($data);
+        //echo json_encode($data);
 
         //query en dolares
         $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, r.importe AS importe, r.fecha AS fecha FROM recaudaciones r 
@@ -236,8 +236,25 @@ class Pago extends CI_Model
         $data = $query->result_array();
         $array_out_dolares = $this->formatoTablaSemestre($data);
         echo json_encode($array_out_dolares);
-
+        echo("************");
+        $array_out_dolares = $this->cambiarASoles($array_out_dolares);
+        echo json_encode($array_out_dolares);
         //
+        return $array_out;
+    }
+    public function cambiarASoles($array)
+    {
+        echo("************");
+        $array_out = array();
+        foreach ($array as $registro) {
+                echo $registro[3];
+                echo("************");
+                $registro[3] *= $this->cambioMoneda->cambiarASoles($fecha);
+                echo("************");
+                echo $registro[3];
+                $array_out[] = $registro;
+        }
+        
         return $array_out;
     }
     public function registrosPorAnio($yearStart, $yearEnd ,$conceptos){

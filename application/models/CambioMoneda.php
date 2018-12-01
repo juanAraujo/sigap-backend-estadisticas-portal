@@ -43,7 +43,7 @@ class CambioMoneda extends CI_Model
     {
         $array_out = $this->obtenerCambio($fecha);
 
-        //print($array_out[1]);
+        echo ($array_out[1]);
         return $array_out[1];
     }
     public function cambiarADolares($fecha)
