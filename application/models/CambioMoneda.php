@@ -38,7 +38,7 @@ class CambioMoneda extends CI_Model
             0 => $info[$fecha]['compra'], 
             1 => $info[$fecha]['venta'],
             );
-            echo json_encode($datos);
+            echo json_encode($array_out);
 
         echo ($array_out[0]);
         return $array_out;
