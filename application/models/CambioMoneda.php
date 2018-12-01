@@ -26,22 +26,20 @@ class CambioMoneda extends CI_Model
 
         }while($data === '[]');
 
-        
+        //resto 1 día
+        $fecha = date("Y-m-d",strtotime($fecha."+ 1 days")); 
+             
+        echo $fecha;
 
-        
         $array_out = $data;
         echo ($array_out);
 
-        if($data==='[]' || $info['fecha_inscripcion']==='--'){
-            $datos = array(0 => 'nada');
-            echo json_encode($datos);
-        }else{
             $array_out = array(
-            0 => $info['compra'], 
-            1 => $info['venta'],
+            0 => $info[$fecha]['compra'], 
+            1 => $info[$fecha]['venta'],
             );
             echo json_encode($datos);
-        }
+
         echo ($array_out[0]);
         return $array_out;
     }
