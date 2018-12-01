@@ -20,7 +20,7 @@ class CambioMoneda extends CI_Model
         $info = json_decode($data, true);
         $array_out = $data;
         echo ($array_out);
-        echo ($info);
+        echo ($info[0]);
 
         if($data==='[]' || $info['fecha_inscripcion']==='--'){
             $datos = array(0 => 'nada');
@@ -33,7 +33,7 @@ class CambioMoneda extends CI_Model
                 }
             }
         }
-        echo ($array_out);
+        echo ($array_out[0]);
         return $array_out;
     }
 
