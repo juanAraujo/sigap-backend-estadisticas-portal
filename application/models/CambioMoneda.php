@@ -6,6 +6,17 @@ class CambioMoneda extends CI_Model
     function __construct(){
 		parent::__construct();
     }
+    function curl_get_contents($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
     public function cambiarASoles($fecha)
     {
         $data = curl_get_contents("https://api.sunat.cloud/".urlencode($fecha));
@@ -32,16 +43,5 @@ class CambioMoneda extends CI_Model
         return $array_out;
     }
 
-    function curl_get_contents($url)
-    {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        $data = curl_exec($ch);
-        curl_close($ch);
-        return $data;
-    }
 }
 ?>
