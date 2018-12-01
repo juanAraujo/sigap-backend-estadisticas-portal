@@ -8,7 +8,7 @@ class CambioMoneda extends CI_Model
     }
     public function cambiarASoles($fecha)
     {
-        $data = file_get_contents("https://api.sunat.cloud/".$fecha);
+        $data = file_get_contents("https://api.sunat.cloud/".urlencode($fecha));
         $info = json_decode($data, true);
         $array_out = $data;
         echo ($fecha);
