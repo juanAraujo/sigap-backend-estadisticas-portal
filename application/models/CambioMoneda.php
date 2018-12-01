@@ -9,7 +9,7 @@ class CambioMoneda extends CI_Model
     
     public function cambiarASoles($fecha)
     {
-        $ch = curl_init("https://api.sunat.cloud/".$fecha);
+        $ch = curl_init("https://api.sunat.cloud/cambio/".$fecha);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -19,7 +19,7 @@ class CambioMoneda extends CI_Model
 
         $info = json_decode($data, true);
         $array_out = $data;
-        echo ($fecha);
+        echo ($array_out);
         if($data==='[]' || $info['fecha_inscripcion']==='--'){
             $datos = array(0 => 'nada');
             echo json_encode($datos);
