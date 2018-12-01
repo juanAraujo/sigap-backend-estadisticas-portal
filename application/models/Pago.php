@@ -219,7 +219,7 @@ class Pago extends CI_Model
         
         $data = $query->result_array();
         $array_out_soles = $this->formatoTablaSemestre($data);
-        print($data);
+        echo json_encode($data);
 
         //query en dolares
         $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, r.importe AS importe, r.fecha AS fecha FROM recaudaciones r 
@@ -235,7 +235,7 @@ class Pago extends CI_Model
         
         $data = $query->result_array();
         $array_out_dolares = $this->formatoTablaSemestre($data);
-        print($data);
+        echo json_encode($array_out_dolares);
 
         //
         return $array_out;
