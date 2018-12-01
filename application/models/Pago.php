@@ -9,6 +9,7 @@ class Pago extends CI_Model
 {
     function __construct(){
         parent::__construct();
+        $this->load->model('cambioMoneda');
     }
 
     public function listarTodosCantidad (){
@@ -193,11 +194,16 @@ class Pago extends CI_Model
             GROUP BY p.sigla_programa, c.concepto
             ORDER BY p.sigla_programa, c.concepto");
         
+        /*el primer query es el estandar de la tabla resultante en base a la cual se sabrá cuantas filas debe tener(programa-concepto) */
+        /*se debe generar dos querys uno la suma de importes de soles y otro query con una lista de (programa-concepto-importe-fecha) siendo el importe en dolares*/
+        /*a la tabla de dolares realizarle el cambio usando la api de la sunat*/
+        /*tras los cambio de moneda se procede a crear la tabla final tomando como guia el resultado estandar se buscará los programa-concepto iguales 
+            de las tablar en soles y dolares y se sumaran los importes y serán almacenados en el importe de la tabla estandar */
+        /*finalmente tendremos la tabla estandar con el importe total en soles*/
         $data = $query->result_array();
         $array_out = $this->formatoTablaSemestre($data);
         return $array_out;
     }
-
     public function registrosPorAnio($yearStart, $yearEnd ,$conceptos){
         if (trim($conceptos) != ""){
             $condicional = "AND c.concepto::integer in (".str_replace ("|",",",$conceptos).")";
