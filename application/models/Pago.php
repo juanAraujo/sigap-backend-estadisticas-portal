@@ -194,14 +194,50 @@ class Pago extends CI_Model
             GROUP BY p.sigla_programa, c.concepto
             ORDER BY p.sigla_programa, c.concepto");
         
+        $data = $query->result_array();
+        $array_out = $this->formatoTablaSemestre($data);
+            
         /*el primer query es el estandar de la tabla resultante en base a la cual se sabrá cuantas filas debe tener(programa-concepto) */
         /*se debe generar dos querys uno la suma de importes de soles y otro query con una lista de (programa-concepto-importe-fecha) siendo el importe en dolares*/
         /*a la tabla de dolares realizarle el cambio usando la api de la sunat*/
         /*tras los cambio de moneda se procede a crear la tabla final tomando como guia el resultado estandar se buscará los programa-concepto iguales 
             de las tablar en soles y dolares y se sumaran los importes y serán almacenados en el importe de la tabla estandar */
         /*finalmente tendremos la tabla estandar con el importe total en soles*/
+
+        //query en soles
+        $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, SUM(r.importe) AS importe FROM recaudaciones r 
+            INNER JOIN concepto c ON (r.id_concepto=c.id_concepto)
+            INNER JOIN alumno_alumno_programa aap ON (r.id_alum=aap.id_alum)
+            INNER JOIN programa p ON (p.id_programa=aap.id_programa)
+            INNER JOIN matricula_cab m ON (m.id_programa=p.id_programa)
+            WHERE (r.moneda='108' r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND m.semestre='".$cicloForma."'
+                 ".$condicional.")
+            GROUP BY p.sigla_programa, c.concepto
+            ORDER BY p.sigla_programa, c.concepto");
+        
         $data = $query->result_array();
-        $array_out = $this->formatoTablaSemestre($data);
+        $array_out_soles = $this->formatoTablaSemestre($data);
+        print($array_out_soles);
+
+        //query en dolares
+        $query = $this->db->query("SELECT p.sigla_programa AS programa, c.concepto AS concepto, r.importe AS importe, r.fecha AS fecha FROM recaudaciones r 
+            INNER JOIN concepto c ON (r.id_concepto=c.id_concepto)
+            INNER JOIN alumno_alumno_programa aap ON (r.id_alum=aap.id_alum)
+            INNER JOIN programa p ON (p.id_programa=aap.id_programa)
+            INNER JOIN matricula_cab m ON (m.id_programa=p.id_programa)
+            WHERE (r.moneda='113' r.fecha >= (SELECT fecha_inicio FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND r.fecha <= (SELECT fecha_fin FROM ciclo WHERE nom_ciclo='".$ciclo."') 
+                AND m.semestre='".$cicloForma."'
+                 ".$condicional.")
+            ORDER BY p.sigla_programa, c.concepto");
+        
+        $data = $query->result_array();
+        $array_out_dolares = $this->formatoTablaSemestre($data);
+        print($array_out_dolares);
+
+        //
         return $array_out;
     }
     public function registrosPorAnio($yearStart, $yearEnd ,$conceptos){

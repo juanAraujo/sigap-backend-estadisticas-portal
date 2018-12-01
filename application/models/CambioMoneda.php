@@ -29,14 +29,12 @@ class CambioMoneda extends CI_Model
         $fecha = date("Y-m-d",strtotime($fecha."+ 1 days")); 
             
         $array_out = $data;
-        print ($array_out);
 
             $array_out = array(
             0 => $info[$fecha]['compra'], 
             1 => $info[$fecha]['venta'],
             );
 
-        print ($array_out[0]);
 
         return $array_out;
 
@@ -45,16 +43,14 @@ class CambioMoneda extends CI_Model
     {
         $array_out = $this->obtenerCambio($fecha);
 
-        print($array_out[1]);
-
+        //print($array_out[1]);
         return $array_out[1];
     }
     public function cambiarADolares($fecha)
     {
         $array_out = $this->obtenerCambio($fecha);
 
-        print($array_out[0]);
-
+        //print($array_out[0]);
         return $array_out[0];
     }
 
