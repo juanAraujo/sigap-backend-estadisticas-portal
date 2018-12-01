@@ -14,7 +14,7 @@ class ApiController extends REST_Controller {
 
     public function cambio_get(){
         $fecha = $this->get('fecha');
-        $array_out = $this->pago->cambiarASoles($fecha);
+        $array_out = $this->cambioMoneda->cambiarASoles($fecha);
         $this->response($array_out);
     }
     public function index_get(){
