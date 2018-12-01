@@ -22,12 +22,13 @@ class CambioMoneda extends CI_Model
             $fecha = date("Y-m-d",strtotime($fecha."- 1 days")); 
              
             echo $fecha;
-
+            $info = json_decode($data, true);
+            
         }while($info === '[]');
 
         
 
-        $info = json_decode($data, true);
+        
         $array_out = $data;
         echo ($array_out);
 
