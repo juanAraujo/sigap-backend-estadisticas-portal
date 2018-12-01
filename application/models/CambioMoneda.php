@@ -43,7 +43,7 @@ class CambioMoneda extends CI_Model
     }
     public function cambiarASoles($fecha)
     {
-        $array_out = this.obtenerCambio($fecha);
+        $array_out = this->obtenerCambio($fecha);
 
         print($array_out[1]);
 
@@ -51,7 +51,7 @@ class CambioMoneda extends CI_Model
     }
     public function cambiarADolares($fecha)
     {
-        $array_out = this.obtenerCambio($fecha);
+        $array_out = this->obtenerCambio($fecha);
 
         print($array_out[0]);
 
