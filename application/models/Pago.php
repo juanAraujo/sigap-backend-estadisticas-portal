@@ -247,11 +247,11 @@ class Pago extends CI_Model
         echo("************");
         $array_out = array();
         foreach ($array as $registro) {
-                echo $registro[3];
+                echo $registro['fecha'];
                 echo("************");
-                $registro[3] *= $this->cambioMoneda->cambiarASoles($fecha);
+                $registro['fecha'] *= $this->cambioMoneda->cambiarASoles($registro['fecha']);
                 echo("************");
-                echo $registro[3];
+                echo $registro['fecha'];
                 $array_out[] = $registro;
         }
         
