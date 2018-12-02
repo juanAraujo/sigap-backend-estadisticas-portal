@@ -250,8 +250,10 @@ class Pago extends CI_Model
         for($i=0; $i<$longitud; $i++)
         {
             echo $array[$i]['fecha'];
-            //$cambio = $this->cambioMoneda->cambiarASoles($array[$i]['fecha']);
+            echo ("*********");
+            echo $this->cambioMoneda->cambiarASoles($array[$i]['fecha']);
             //$array[$i]['importe'] = $array[$i]['importe'] * $cambio;
+            echo ("*********");
         }
         
         return $array;
