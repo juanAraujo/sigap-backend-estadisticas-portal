@@ -246,8 +246,10 @@ class Pago extends CI_Model
     {
         //echo("************");
         $array_out = array();
-        echo($this->cambioMoneda->cambiarASoles($registro['fecha']));
-        foreach ($array as $registro) {
+        echo ('2018-01-01');
+        echo($this->cambioMoneda->cambiarASoles('2018-01-01'));
+        echo $registro['fecha'];
+        /*foreach ($array as $registro) {
                 echo $registro['importe'];
                 echo("************");
                 $cambio = $this->cambioMoneda->cambiarASoles($registro['fecha']);
@@ -257,7 +259,7 @@ class Pago extends CI_Model
                 echo $registro['importe'];
                 echo("************");
                 $array_out[] = $registro;
-        }
+        }*/
         
         return $array_out;
     }
