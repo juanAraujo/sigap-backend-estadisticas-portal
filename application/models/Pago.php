@@ -237,21 +237,21 @@ class Pago extends CI_Model
         $array_out_dolares = $this->formatoTablaSemestre($data);
         //echo json_encode($array_out_dolares);
         //echo("************");
-        $array_out_dolares = $this->cambiarASoles($data);
+        $array_out_dolares = $this->cambiarASoles($array_out_dolares);
         //echo json_encode($array_out_dolares);
         //
         return $array_out;
     }
-    public function cambiarASoles($data)
+    public function cambiarASoles($array)
     {
         echo("************");
         $array_out = array();
-        foreach ($data as $registro) {
+        foreach ($array as $registro) {
                 echo $registro['importe'];
                 echo("************");
-                $registro['importe'] *= $this->cambioMoneda->cambiarASoles($registro['fecha']);
+                //$registro['importe'] *= $this->cambioMoneda->cambiarASoles($registro['fecha']);
                 echo("************");
-                echo $registro['importe'];
+                echo $registro['fecha'];
                 $array_out[] = $registro;
         }
         
