@@ -244,23 +244,15 @@ class Pago extends CI_Model
     }
     public function cambiarASoles($array)
     {
-        //echo("************");
         $array_out = array();
-        echo($this->cambioMoneda->cambiarASoles($array[0]['fecha']));
-        echo $array[0]['fecha'];
-        /*foreach ($array as $registro) {
-                echo $registro['importe'];
-                echo("************");
-                $cambio = $this->cambioMoneda->cambiarASoles($registro['fecha']);
-                $cambio = $cambio +0;
-                $registro['importe'] = $registro['importe'] * $cambio;
-                
-                echo $registro['importe'];
-                echo("************");
-                $array_out[] = $registro;
-        }*/
+        $longitud = count($array);
+        for($i=0; $i<$longitud; $i++)
+        {
+            $cambio = $this->cambioMoneda->cambiarASoles($array[$i]['fecha']);
+            $array[$i]['importe'] = $array[$i]['importe'] * $cambio;
+        }
         
-        return $array_out;
+        return $array;
     }
     public function registrosPorAnio($yearStart, $yearEnd ,$conceptos){
         if (trim($conceptos) != ""){
