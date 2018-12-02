@@ -244,14 +244,15 @@ class Pago extends CI_Model
     }
     public function cambiarASoles($array)
     {
-        echo("************");
+        //echo("************");
         $array_out = array();
         foreach ($array as $registro) {
                 echo $registro['importe'];
                 echo("************");
-                //$registro['importe'] *= $this->cambioMoneda->cambiarASoles($registro['fecha']);
+                $registro['importe'] = $registro['importe'] * 1 * $this->cambioMoneda->cambiarASoles($registro['fecha']);
+                
+                echo $registro['importe'];
                 echo("************");
-                echo $registro['fecha'];
                 $array_out[] = $registro;
         }
         
